@@ -131,7 +131,10 @@ while True:
         mtype, msg = msg.split(": ")
         if mtype == "I":
             ops_value, remote_ip = msg.split(' ')
-            remote_ip = socket.inet_ntoa(struct.pack("I", int(remote_ip)))
+            remote_ip = int(remote_ip)
+            if remote_ip < 0 or remote_ip > 0xFFFFFFFF:
+                continue
+            remote_ip = socket.inet_ntoa(struct.pack("I", remote_ip))
             print(f"  [-] {put_color(task, 'blue')} ({pid}) => {put_color(remote_ip, 'cyan')}, event is {ops_value}")
         elif mtype == "W":
             print(f"[*] ebpf 执行警告: {put_color(msg, 'yellow')}")

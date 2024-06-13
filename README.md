@@ -9,7 +9,13 @@
 - python: `3.11.6`（最好 >= `3.10`，ubuntu 23 自带 3.11.6）
 
 **安装依赖**
+ubuntu 23
 - `sudo apt-get install bpfcc-tools linux-headers-$(uname -r)`
+
+ubuntu 22
+- 需要从源码安装最新bcc，[参考](https://github.com/iovisor/bcc/blob/master/INSTALL.md#ubuntu---source)
+- 如果`import bcc`报错，就把`build/src/python/bcc-python3/bcc`目录拷贝到`/usr/lib/python3/dist-packages/`
+
 
 **执行 toast.py**
 - 挂到根 cgroup: `sudo python3 toast.py --ip 12.23.34.45`，至此，本机所有 TCP 请求均会携带 `TOA`
@@ -42,8 +48,3 @@
 Copyright © 2023 [Macr0phag3](https://github.com/Macr0phag3).
 
 This project is MIT licensed.
-
-## Others
-<img src="https://clean-1252075454.cos.ap-nanjing.myqcloud.com/20200528120800990.png" width="500">
-
-[![Stargazers over time](https://starchart.cc/Macr0phag3/toast.svg)](https://starchart.cc/Macr0phag3/toast)
